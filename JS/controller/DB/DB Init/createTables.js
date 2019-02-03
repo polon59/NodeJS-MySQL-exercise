@@ -5,7 +5,11 @@ var connection = dataBaseConn.connection;
 
 createTables();
 
-
+function createTables() {
+    createUsersTable();
+    createInvoicesTable();
+    createServicesTable();
+}
 
 function createUsersTable(){
     let sql = `CREATE TABLE users (
