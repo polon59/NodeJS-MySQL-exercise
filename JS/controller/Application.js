@@ -1,16 +1,19 @@
 var DbConn = require('./DB/dbConn.js');
-var UserDAO = require('./DB/userDAO.js');
+var LoginController = require('./login/loginController.js');
 
 class Application{
 
     constructor(){
         this.dbConn = new DbConn();
-        this.userDAO = new UserDAO(this.dbConn.connection);
+        this.loginController = new LoginController(this.dbConn.connection);
+        this.currentUser = undefined;
     }
 
     launchApplication(){
-        this.userDAO.addNewUserToDatabase("Zbyszek", "1234");
-        this.userDAO.getAllUsersFromDataBase();
+        // this.currentUser = this.loginController.register();
+        // console.log(this.currentUser.getUserData());
+
+        let a =this.loginController.getAllUsersFromDB();
     }
 }
 
