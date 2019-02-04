@@ -28,8 +28,8 @@ function createInvoicesTable(){
         id SERIAL PRIMARY KEY,
         userID INTEGER REFERENCES users(id),
         title TEXT,
-        date TEXT,
-        from TEXT,
+        bill_date TEXT,
+        bill_from TEXT,
         bill_to TEXT
     );`;
     connection.query(sql, function (err, result) {
@@ -44,7 +44,7 @@ function createServicesTable(){
         userID INTEGER REFERENCES invoices(id),
         description TEXT,
         quantity INTEGER,
-        tax INTEGER,
+        tax INTEGER
     );`;
     connection.query(sql, function (err, result) {
       if (err) {throw err}
