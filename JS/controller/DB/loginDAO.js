@@ -1,3 +1,5 @@
+
+
 class LoginDAO{
     
         constructor(dbConnection){
@@ -6,7 +8,6 @@ class LoginDAO{
     
 
         addNewUserToDatabase(login, password){
-            let queryRes = 1;
             let sql = `INSERT INTO users (login,  password) VALUES ('${login}', '${password}');`;
 
             this.connection.query(sql, function (err, result) {
@@ -18,16 +19,29 @@ class LoginDAO{
     
 
         getUserIDFromDatabase(login, password){
-            let userID = undefined;
+            var userID = undefined;
             let sql = `SELECT id FROM users WHERE login=${login} AND password=${password};`
 
             this.connection.query(sql, function (err, result, fields) {
-                if (err) console.log("SQL ERROR getting user from database");
+                if (err) {console.log("SQL ERROR getting user from database")};
                 userID = result;
               });
             return userID;
         }
-    
+
+        
+        getAllUsersFromDB(){
+            let self = this;
+            let sql = `SELECT * FROM users;`
+
+            return new Promise(function(resolve, reject){
+                self.connection.query(sql, function (err, result, fields) {
+                    if (err) console.log("SQL ERROR getting allUsers from database")
+                    resolve(result);
+                });
+            })
+        }
+        
     }
     
     module.exports = LoginDAO;
